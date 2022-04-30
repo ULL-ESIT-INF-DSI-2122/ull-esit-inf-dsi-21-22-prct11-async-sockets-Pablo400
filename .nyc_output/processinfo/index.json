@@ -1,0 +1,1 @@
+{"processes":{"38442b65-7159-493b-9db2-c6877b6b8e12":{"parent":null,"children":["bf07f630-c6c2-4bd1-9018-512de7731e02"]},"bf07f630-c6c2-4bd1-9018-512de7731e02":{"parent":"38442b65-7159-493b-9db2-c6877b6b8e12","children":[]}},"files":{"/home/usuario/ull-esit-inf-dsi-21-22-prct11-async-sockets-Pablo400/src/index.ts":["bf07f630-c6c2-4bd1-9018-512de7731e02"]},"externalIds":{}}
