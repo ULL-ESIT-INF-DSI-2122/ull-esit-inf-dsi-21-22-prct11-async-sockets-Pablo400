@@ -1,38 +1,7 @@
-/* eslint-disable no-unused-vars */
-/* eslint-disable require-jsdoc */
 /* eslint-disable max-len */
-
+/* eslint-disable no-unused-vars */
 import * as yargs from 'yargs';
-import {AddUserDirectory} from './NoteOperations/addUserDirectory';
-import {AddNote} from './NoteOperations/addNote';
-import {ModifyNote} from './NoteOperations/modifyNote';
-import {RemoveNote} from './NoteOperations/removeNote';
-import {ListNotes} from './NoteOperations/listNotes';
-import {ReadNotes} from './NoteOperations/readNotes';
-
-
-const addUser = new AddUserDirectory();
-const addNote = new AddNote();
-const modifyNote = new ModifyNote();
-const removeNote = new RemoveNote();
-const listNotes = new ListNotes();
-const readNote = new ReadNotes();
-
-// Add User
-yargs.command({
-  command: 'addUser',
-  describe: 'Adds a user to the system',
-  builder: {
-    user: {
-      describe: 'User name',
-      demandOption: true,
-      type: 'string',
-    },
-  },
-  handler(argv) {
-    addUser.addUserDirectory(`${argv.user}`);
-  },
-});
+import {RequestType} from './types';
 
 // Add Note
 yargs.command({
@@ -61,7 +30,14 @@ yargs.command({
     },
   },
   handler(argv) {
-    addNote.addNote(`${argv.user}`, `${argv.title}`, `${argv.body}`, `${argv.color}`);
+    const request: RequestType = {
+      type: 'add',
+      user: `${argv.user}`,
+      title: `${argv.title}`,
+      body: `${argv.body}`,
+      color: `${argv.color}`};
+
+    console.log(JSON.parse(JSON.stringify(request)));
   },
 });
 
@@ -87,7 +63,11 @@ yargs.command({
     },
   },
   handler(argv) {
-    modifyNote.modifyNote(`${argv.user}`, `${argv.title}`, `${argv.body}`);
+    const request: RequestType = {
+      type: 'update',
+      user: `${argv.user}`,
+      title: `${argv.title}`,
+      body: `${argv.body}`};
   },
 });
 
@@ -108,7 +88,9 @@ yargs.command({
     },
   },
   handler(argv) {
-    removeNote.removeNote(`${argv.user}`, `${argv.title}`);
+    const request: RequestType = {type: 'remove',
+      user: `${argv.user}`,
+      title: `${argv.title}`};
   },
 });
 
@@ -124,7 +106,8 @@ yargs.command({
     },
   },
   handler(argv) {
-    listNotes.listNotes(`${argv.user}`);
+    const request: RequestType = {type: 'list',
+      user: `${argv.user}`};
   },
 });
 
@@ -145,9 +128,10 @@ yargs.command({
     },
   },
   handler(argv) {
-    readNote.readNote(`${argv.user}`, `${argv.title}`);
+    const request: RequestType = {type: 'read',
+      user: `${argv.user}`,
+      title: `${argv.title}`};
   },
 });
 
 yargs.parse();
-

@@ -40,3 +40,23 @@ export class ReadNotes extends ChalkColor implements readNoteInterface {
     });
   }
 };
+
+export const readNoteCallback = (user: string, title: string, cb: (err: string | undefined, correct: string | undefined) => void) => {
+  const color = new ChalkColor();
+  fs.access(`/home/usuario/ull-esit-inf-dsi-21-22-prct11-async-sockets-Pablo400/ProgramFiles/${user}/${title}.json`, fs.constants.F_OK, (err: Error) => {
+    if (err) {
+      cb(color.getColor('red', 'Esa nota no existe'), undefined);
+    } else {
+      fs.readFile(`/home/usuario/ull-esit-inf-dsi-21-22-prct11-async-sockets-Pablo400/ProgramFiles/${user}/${title}.json`, (err: Error) => {
+        if (err) {
+          cb(color.getColor('red', 'Ha ocurrido un error inesperado'), undefined);
+        } else {
+          const json: any = require(`/home/usuario/ull-esit-inf-dsi-21-22-prct11-async-sockets-Pablo400/ProgramFiles/${user}/${title}.json`);
+          console.log(color.getColor(json.color, json.title));
+          console.log(color.getColor(json.color, json.body));
+          cb(undefined, `${color.getColor(json.color, json.title)}, ${color.getColor(json.color, json.body)}`);
+        }
+      });
+    }
+  });
+};

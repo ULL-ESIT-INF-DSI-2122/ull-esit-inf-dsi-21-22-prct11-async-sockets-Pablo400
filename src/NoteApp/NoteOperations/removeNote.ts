@@ -38,3 +38,20 @@ export class RemoveNote extends ChalkColor implements removeNoteInterface {
     });
   }
 };
+
+export const removeNoteCallback = (user: string, title: string, cb: (err: string | undefined, correct: string | undefined) => void) => {
+  const color = new ChalkColor();
+  fs.access(`/home/usuario/ull-esit-inf-dsi-21-22-prct11-async-sockets-Pablo400/ProgramFiles/${user}/${title}.json`, fs.constants.F_OK, (err: Error) => {
+    if (err) {
+      cb(color.getColor('red', 'Esa nota no existe'), undefined);
+    } else {
+      fs.unlink(`/home/usuario/ull-esit-inf-dsi-21-22-prct11-async-sockets-Pablo400/ProgramFiles/${user}/${title}.json`, (err: Error) => {
+        if (err) {
+          cb(color.getColor('red', 'La nota no pudo ser eliminada'), undefined);
+        }
+
+        cb(undefined, color.getColor('green', 'Nota eliminada'));
+      });
+    }
+  });
+};
