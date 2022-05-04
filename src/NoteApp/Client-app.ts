@@ -2,6 +2,9 @@
 /* eslint-disable no-unused-vars */
 import * as yargs from 'yargs';
 import {RequestType} from './types';
+import {Client} from './client';
+
+let request: RequestType;
 
 // Add Note
 yargs.command({
@@ -30,14 +33,15 @@ yargs.command({
     },
   },
   handler(argv) {
-    const request: RequestType = {
+    request = {
       type: 'add',
       user: `${argv.user}`,
       title: `${argv.title}`,
       body: `${argv.body}`,
       color: `${argv.color}`};
 
-    console.log(JSON.parse(JSON.stringify(request)));
+    const client = new Client(request);
+    client.client();
   },
 });
 
@@ -63,11 +67,14 @@ yargs.command({
     },
   },
   handler(argv) {
-    const request: RequestType = {
+    request = {
       type: 'update',
       user: `${argv.user}`,
       title: `${argv.title}`,
       body: `${argv.body}`};
+
+    const client = new Client(request);
+    client.client();
   },
 });
 
@@ -88,9 +95,12 @@ yargs.command({
     },
   },
   handler(argv) {
-    const request: RequestType = {type: 'remove',
+    request = {type: 'remove',
       user: `${argv.user}`,
       title: `${argv.title}`};
+
+    const client = new Client(request);
+    client.client();
   },
 });
 
@@ -106,8 +116,11 @@ yargs.command({
     },
   },
   handler(argv) {
-    const request: RequestType = {type: 'list',
+    request = {type: 'list',
       user: `${argv.user}`};
+
+    const client = new Client(request);
+    client.client();
   },
 });
 
@@ -128,10 +141,15 @@ yargs.command({
     },
   },
   handler(argv) {
-    const request: RequestType = {type: 'read',
+    request = {type: 'read',
       user: `${argv.user}`,
       title: `${argv.title}`};
+
+    const client = new Client(request);
+    client.client();
   },
 });
 
 yargs.parse();
+
+

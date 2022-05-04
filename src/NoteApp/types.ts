@@ -10,10 +10,11 @@ export type ResponseType = {
   type: 'add' | 'update' | 'remove' | 'read' | 'list';
   success: boolean;
   notes?: Note[];
+  error?: string;
 }
 
 export type Note = {
-  type: string;
+  title: string;
   body: string;
   color: string;
 };

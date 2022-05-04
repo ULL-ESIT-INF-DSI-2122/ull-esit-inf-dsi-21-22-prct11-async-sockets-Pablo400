@@ -5,6 +5,7 @@
 const fs = require('fs');
 
 import {ChalkColor} from './utilities';
+import {ResponseType} from '../types';
 
 
 /**
@@ -21,18 +22,31 @@ export class RemoveNote extends ChalkColor {
    * @param title
    * @returns
    */
-  removeNoteCallback = (user: string, title: string, cb: (err: string | undefined, correct: string | undefined) => void) => {
+  removeNoteCallback = (user: string, title: string, cb: (err: ResponseType | undefined, correct: ResponseType | undefined) => void) => {
     const color = new ChalkColor();
+    let response: ResponseType = {
+      type: 'add',
+      success: false,
+    };
     fs.access(`/home/usuario/ull-esit-inf-dsi-21-22-prct11-async-sockets-Pablo400/ProgramFiles/${user}/${title}.json`, fs.constants.F_OK, (err: Error) => {
       if (err) {
-        cb(color.getColor('red', 'Esa nota no existe'), undefined);
+        response = {type: 'remove', success: false, error: color.getColor('red', 'Esa nota no existe')};
+        cb(response, undefined);
       } else {
         fs.unlink(`/home/usuario/ull-esit-inf-dsi-21-22-prct11-async-sockets-Pablo400/ProgramFiles/${user}/${title}.json`, (err: Error) => {
           if (err) {
-            cb(color.getColor('red', 'La nota no pudo ser eliminada'), undefined);
+            response = {type: 'remove', success: false, error: color.getColor('red', 'La nota no pudo ser eliminada')};
+            cb(response, undefined);
           }
 
-          cb(undefined, color.getColor('green', 'Nota eliminada'));
+          const json = require(`/home/usuario/ull-esit-inf-dsi-21-22-prct11-async-sockets-Pablo400/ProgramFiles/${user}/${title}.json`);
+          response = {
+            type: 'remove',
+            success: true,
+            notes: [json],
+          };
+
+          cb(undefined, response);
         });
       }
     });
