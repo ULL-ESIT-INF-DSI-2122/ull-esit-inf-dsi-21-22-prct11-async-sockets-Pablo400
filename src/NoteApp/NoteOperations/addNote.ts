@@ -49,14 +49,14 @@ export class AddNote extends ChalkColor {
                 cb(undefined, color.getColor('green', 'La nota se ha creado de forma satisfactoria'));
               });
             } else {
-              cb(color.getColor('red', 'Esa nota ya existe'), undefined);
+              cb(undefined, color.getColor('red', 'Esa nota ya existe'));
             }
           });
         } else {
-          cb(color.getColor('red', 'No se puede crear una nota si no se le indican un color, use: red, green, yellow o blue como colores'), undefined);
+          cb(undefined, color.getColor('red', 'No se puede crear una nota si no se le indican un color, use: red, green, yellow o blue como colores'));
         }
       } else {
-        cb(color.getColor('red', 'No se puede crear una nota vacía'), undefined);
+        cb(undefined, color.getColor('red', 'No se puede crear una nota vacía'));
       }
     });
   };

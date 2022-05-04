@@ -9,27 +9,27 @@ import {ChalkColor} from '../src/NoteApp/NoteOperations/utilities';
 const color = new ChalkColor();
 const addNote = new AddNote();
 
-describe('Asynchronous function weatherInfo tests', () => {
+describe('Add Note Test', () => {
   it('Esa nota ya existe', (done) => {
-    addNote.addNoteCallback('pablo', 'prueba3', 'Esto es una fiesta', 'red', (err, _) => {
-      if (err) {
-        expect(err).to.be.equal(color.getColor('red', 'Esa nota ya existe'));
+    addNote.addNoteCallback('pablo', 'prueba3', 'Esto es una fiesta', 'red', (_, data) => {
+      if (data) {
+        expect(data).to.be.equal(color.getColor('red', 'Esa nota ya existe'));
         done();
       }
     });
   });
   it('Ese color no existe', (done) => {
-    addNote.addNoteCallback('pablo', 'prueba3', 'Esto es una fiesta', 'marrón', (err, _) => {
-      if (err) {
-        expect(err).to.be.equal(color.getColor('red', 'No se puede crear una nota si no se le indican un color, use: red, green, yellow o blue como colores'));
+    addNote.addNoteCallback('pablo', 'prueba3', 'Esto es una fiesta', 'marrón', (_, data) => {
+      if (data) {
+        expect(data).to.be.equal(color.getColor('red', 'No se puede crear una nota si no se le indican un color, use: red, green, yellow o blue como colores'));
         done();
       }
     });
   });
   it('Nota vacía', (done) => {
-    addNote.addNoteCallback('pablo', '', 'Esto es una fiesta', 'marrón', (err, _) => {
-      if (err) {
-        expect(err).to.be.equal(color.getColor('red', 'No se puede crear una nota vacía'));
+    addNote.addNoteCallback('pablo', '', 'Esto es una fiesta', 'marrón', (_, data) => {
+      if (data) {
+        expect(data).to.be.equal(color.getColor('red', 'No se puede crear una nota vacía'));
         done();
       }
     });

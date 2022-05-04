@@ -8,7 +8,7 @@ import {ChalkColor} from '../src/NoteApp/NoteOperations/utilities';
 const color = new ChalkColor();
 const readNote = new ReadNotes();
 
-describe('Asynchronous function weatherInfo tests', () => {
+describe('Read Note Test', () => {
   it('Esa nota no existe', (done) => {
     readNote.readNoteCallback('pablo', 'pablo', (err, _) => {
       if (err) {
