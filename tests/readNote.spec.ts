@@ -2,14 +2,15 @@
 import 'mocha';
 import {expect} from 'chai';
 
-import {readNoteCallback} from '../src/NoteApp/NoteOperations/readNotes';
+import {ReadNotes} from '../src/NoteApp/NoteOperations/readNotes';
 import {ChalkColor} from '../src/NoteApp/NoteOperations/utilities';
 
 const color = new ChalkColor();
+const readNote = new ReadNotes();
 
 describe('Asynchronous function weatherInfo tests', () => {
   it('Esa nota no existe', (done) => {
-    readNoteCallback('pablo', 'pablo', (err, _) => {
+    readNote.readNoteCallback('pablo', 'pablo', (err, _) => {
       if (err) {
         expect(err).to.be.equal(color.getColor('red', 'Esa nota no existe'));
         done();
@@ -17,9 +18,9 @@ describe('Asynchronous function weatherInfo tests', () => {
     });
   });
   it('Lectura de una nota', (done) => {
-    readNoteCallback('pablo', 'prueba3', (_, data) => {
+    readNote.readNoteCallback('pablo', 'prueba3', (_, data) => {
       if (data) {
-        expect(data).to.be.equal(`${color.getColor('red', 'prueba3')}, ${color.getColor('red', 'Esto es una fiesta')}`);
+        expect(data).to.be.equal(`Título: ${color.getColor('red', 'prueba3')} => Contenido: ${color.getColor('red', 'Esto es una fiesta')}`);
         done();
       }
     });

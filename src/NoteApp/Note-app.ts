@@ -3,14 +3,14 @@
 /* eslint-disable max-len */
 
 import * as yargs from 'yargs';
-import {addNoteCallback} from './NoteOperations/addNote';
+import {AddNote} from './NoteOperations/addNote';
 import {ModifyNote} from './NoteOperations/modifyNote';
 import {RemoveNote} from './NoteOperations/removeNote';
 import {ListNotes} from './NoteOperations/listNotes';
 import {ReadNotes} from './NoteOperations/readNotes';
 
 
-// const addNote = new AddNote();
+const addNote = new AddNote();
 const modifyNote = new ModifyNote();
 const removeNote = new RemoveNote();
 const listNotes = new ListNotes();
@@ -44,7 +44,7 @@ yargs.command({
   },
   handler(argv) {
     // addNote.addNote(`${argv.user}`, `${argv.title}`, `${argv.body}`, `${argv.color}`);
-    addNoteCallback(`${argv.user}`, `${argv.title}`, `${argv.body}`, `${argv.color}`, (err, correct) => {
+    addNote.addNoteCallback(`${argv.user}`, `${argv.title}`, `${argv.body}`, `${argv.color}`, (err, correct) => {
       if (err) {
         console.log(err);
       } else if (correct) {
@@ -76,7 +76,14 @@ yargs.command({
     },
   },
   handler(argv) {
-    modifyNote.modifyNote(`${argv.user}`, `${argv.title}`, `${argv.body}`);
+    // modifyNote.modifyNote(`${argv.user}`, `${argv.title}`, `${argv.body}`);
+    modifyNote.modifyNoteCallback(`${argv.user}`, `${argv.title}`, `${argv.body}`, (err, correct) => {
+      if (err) {
+        console.log(err);
+      } else if (correct) {
+        console.log(correct);
+      }
+    });
   },
 });
 
@@ -97,7 +104,14 @@ yargs.command({
     },
   },
   handler(argv) {
-    removeNote.removeNote(`${argv.user}`, `${argv.title}`);
+    // removeNote.removeNote(`${argv.user}`, `${argv.title}`);
+    removeNote.removeNoteCallback(`${argv.user}`, `${argv.title}`, (err, correct) => {
+      if (err) {
+        console.log(err);
+      } else if (correct) {
+        console.log(correct);
+      }
+    });
   },
 });
 
@@ -113,7 +127,14 @@ yargs.command({
     },
   },
   handler(argv) {
-    listNotes.listNotes(`${argv.user}`);
+    // listNotes.listNotes(`${argv.user}`);
+    listNotes.listNoteCallback(`${argv.user}`, (err, correct) => {
+      if (err) {
+        console.log(err);
+      } else if (correct) {
+        console.log(correct);
+      }
+    });
   },
 });
 
@@ -134,7 +155,14 @@ yargs.command({
     },
   },
   handler(argv) {
-    readNote.readNote(`${argv.user}`, `${argv.title}`);
+    // readNote.readNote(`${argv.user}`, `${argv.title}`);
+    readNote.readNoteCallback(`${argv.user}`, `${argv.title}`, (err, correct) => {
+      if (err) {
+        console.log(err);
+      } else if (correct) {
+        console.log(correct);
+      }
+    });
   },
 });
 

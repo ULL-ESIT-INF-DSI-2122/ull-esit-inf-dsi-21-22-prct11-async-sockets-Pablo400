@@ -5,12 +5,12 @@
 const fs = require('fs');
 
 import {ChalkColor} from './utilities';
-import {removeNoteInterface} from './interfaces';
+
 
 /**
  * Class to Remove Notes
  */
-export class RemoveNote extends ChalkColor implements removeNoteInterface {
+export class RemoveNote extends ChalkColor {
   constructor() {
     super();
   }
@@ -21,37 +21,21 @@ export class RemoveNote extends ChalkColor implements removeNoteInterface {
    * @param title
    * @returns
    */
-  removeNote(user: string, title: string) {
+  removeNoteCallback = (user: string, title: string, cb: (err: string | undefined, correct: string | undefined) => void) => {
     const color = new ChalkColor();
-    fs.readFile(`/home/usuario/ull-esit-inf-dsi-21-22-prct11-async-sockets-Pablo400/ProgramFiles/${user}/${title}.json`, (err: Error) => {
+    fs.access(`/home/usuario/ull-esit-inf-dsi-21-22-prct11-async-sockets-Pablo400/ProgramFiles/${user}/${title}.json`, fs.constants.F_OK, (err: Error) => {
       if (err) {
-        return console.log(color.getColor('red', 'Esa nota no existe'));
+        cb(color.getColor('red', 'Esa nota no existe'), undefined);
+      } else {
+        fs.unlink(`/home/usuario/ull-esit-inf-dsi-21-22-prct11-async-sockets-Pablo400/ProgramFiles/${user}/${title}.json`, (err: Error) => {
+          if (err) {
+            cb(color.getColor('red', 'La nota no pudo ser eliminada'), undefined);
+          }
+
+          cb(undefined, color.getColor('green', 'Nota eliminada'));
+        });
       }
-
-      fs.unlink(`/home/usuario/ull-esit-inf-dsi-21-22-prct11-async-sockets-Pablo400/ProgramFiles/${user}/${title}.json`, (err: Error) => {
-        if (err) {
-          return console.log(color.getColor('red', 'La nota no pudo ser eliminada'));
-        }
-
-        return console.log(color.getColor('green', 'Nota eliminada'));
-      });
     });
-  }
+  };
 };
 
-export const removeNoteCallback = (user: string, title: string, cb: (err: string | undefined, correct: string | undefined) => void) => {
-  const color = new ChalkColor();
-  fs.access(`/home/usuario/ull-esit-inf-dsi-21-22-prct11-async-sockets-Pablo400/ProgramFiles/${user}/${title}.json`, fs.constants.F_OK, (err: Error) => {
-    if (err) {
-      cb(color.getColor('red', 'Esa nota no existe'), undefined);
-    } else {
-      fs.unlink(`/home/usuario/ull-esit-inf-dsi-21-22-prct11-async-sockets-Pablo400/ProgramFiles/${user}/${title}.json`, (err: Error) => {
-        if (err) {
-          cb(color.getColor('red', 'La nota no pudo ser eliminada'), undefined);
-        }
-
-        cb(undefined, color.getColor('green', 'Nota eliminada'));
-      });
-    }
-  });
-};
