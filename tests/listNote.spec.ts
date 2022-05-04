@@ -17,7 +17,7 @@ describe('List Note test', () => {
       }
     });
   });
-  it('Ese usuario no existe', (done) => {
+  it('Listar notas', (done) => {
     listNote.listNoteCallback('ricardo', (_, data) => {
       if (data) {
         expect(data).to.be.equal(color.getColor('green', 'Prueba'));

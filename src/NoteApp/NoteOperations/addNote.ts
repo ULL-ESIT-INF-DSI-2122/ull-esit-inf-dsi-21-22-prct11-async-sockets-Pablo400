@@ -44,9 +44,9 @@ export class AddNote extends ChalkColor {
               fs.writeFile(`/home/usuario/ull-esit-inf-dsi-21-22-prct11-async-sockets-Pablo400/ProgramFiles/${user}/${title}.json`, JSON.stringify(json, null, 2), (err: Error) => {
                 if (err) {
                   cb(color.getColor('red', 'No se ha podido crear la nota'), undefined);
+                } else {
+                  cb(undefined, color.getColor('green', 'La nota se ha creado de forma satisfactoria'));
                 }
-
-                cb(undefined, color.getColor('green', 'La nota se ha creado de forma satisfactoria'));
               });
             } else {
               cb(undefined, color.getColor('red', 'Esa nota ya existe'));

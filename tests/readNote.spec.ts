@@ -18,9 +18,9 @@ describe('Read Note Test', () => {
     });
   });
   it('Lectura de una nota', (done) => {
-    readNote.readNoteCallback('pablo', 'prueba3', (_, data) => {
-      if (data) {
-        expect(data).to.be.equal(`Título: ${color.getColor('red', 'prueba3')} => Contenido: ${color.getColor('red', 'Esto es una fiesta')}`);
+    readNote.readNoteCallback('pablo', 'prueba3', (err, _) => {
+      if (err) {
+        expect(err).to.be.equal(`Título: ${color.getColor('red', 'prueba3')} => Contenido: ${color.getColor('red', 'Esto es una fiesta')}`);
         done();
       }
     });

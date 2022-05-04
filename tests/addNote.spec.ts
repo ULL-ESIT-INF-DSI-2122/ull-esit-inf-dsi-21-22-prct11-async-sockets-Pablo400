@@ -34,7 +34,7 @@ describe('Add Note Test', () => {
       }
     });
   });
-  it('Esa nota ya existe', (done) => {
+  it('Crear Nota', (done) => {
     addNote.addNoteCallback('pablo', 'prueba4', 'Esto es una fiesta', 'red', (_, data) => {
       if (data) {
         expect(data).to.be.equal(color.getColor('green', 'La nota se ha creado de forma satisfactoria'));

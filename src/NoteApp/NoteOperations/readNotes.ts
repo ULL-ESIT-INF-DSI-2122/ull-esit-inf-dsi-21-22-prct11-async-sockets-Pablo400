@@ -32,7 +32,7 @@ export class ReadNotes extends ChalkColor {
             cb(color.getColor('red', 'Ha ocurrido un error inesperado'), undefined);
           } else {
             const json: any = require(`/home/usuario/ull-esit-inf-dsi-21-22-prct11-async-sockets-Pablo400/ProgramFiles/${user}/${title}.json`);
-            cb(undefined, `Título: ${color.getColor(json.color, json.title)} => Contenido: ${color.getColor(json.color, json.body)}`);
+            cb(`Título: ${color.getColor(json.color, json.title)} => Contenido: ${color.getColor(json.color, json.body)}`, undefined);
           }
         });
       }

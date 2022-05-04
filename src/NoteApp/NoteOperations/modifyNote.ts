@@ -32,11 +32,11 @@ export class ModifyNote extends ChalkColor {
           json.body = body;
 
           fs.writeFile(`/home/usuario/ull-esit-inf-dsi-21-22-prct11-async-sockets-Pablo400/ProgramFiles/${user}/${title}.json`, JSON.stringify(json, null, 2), (err: Error) => {
-            if (err || body === '') {
+            if (err) {
               cb(color.getColor('red', 'No se ha podido modificar la nota'), undefined);
+            } else {
+              cb(undefined, color.getColor('green', 'La nota se ha modificado de forma satisfactoria'));
             }
-
-            cb(undefined, color.getColor('green', 'La nota se ha modificado de forma satisfactoria'));
           });
         });
       }

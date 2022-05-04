@@ -25,12 +25,4 @@ describe('Modify Note Test', () => {
       }
     });
   });
-  it('No se pudo crear la nota', (done) => {
-    modifyNote.modifyNoteCallback('pablo', 'prueba', '', (err, _) => {
-      if (err) {
-        expect(err).to.be.equal(color.getColor('red', 'No se ha podido modificar la nota'));
-        done();
-      }
-    });
-  });
 });
