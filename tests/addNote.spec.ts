@@ -15,6 +15,7 @@ let response: ResponseType = {
 };
 
 describe('Add Note Test', () => {
+  // Funciona
   it('Ese usuario no existe', (done) => {
     addNote.addNoteCallback('eduardo', 'prueba3', 'Esto es una fiesta', 'red', (err, _) => {
       response = {type: 'add', success: false, error: color.getColor('red', 'Ese usuario no existe')};

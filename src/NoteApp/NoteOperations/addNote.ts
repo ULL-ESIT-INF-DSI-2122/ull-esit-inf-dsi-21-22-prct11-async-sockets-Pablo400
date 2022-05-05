@@ -30,19 +30,19 @@ export class AddNote extends ChalkColor {
       success: false,
     };
 
-    fs.access(`/home/usuario/ull-esit-inf-dsi-21-22-prct11-async-sockets-Pablo400/ProgramFiles/${user}`, fs.constants.F_OK, (err: Error) => {
-      if (err) {
-        response = {type: 'add', success: false, error: color.getColor('red', 'Ese usuario no existe')};
-        cb(response, undefined);
-      } else {
-        const json: any = {
-          title: title,
-          body: body,
-          color: noteColor,
-        };
+    const json: any = {
+      title: title,
+      body: body,
+      color: noteColor,
+    };
 
-        if (title != '' && noteColor != '' && body != '' ) {
-          if (noteColor === 'red' || noteColor === 'green' || noteColor === 'yellow' || noteColor === 'blue') {
+    if (title != '' && noteColor != '' && body != '' ) {
+      if (noteColor === 'red' || noteColor === 'green' || noteColor === 'yellow' || noteColor === 'blue') {
+        fs.access(`/home/usuario/ull-esit-inf-dsi-21-22-prct11-async-sockets-Pablo400/ProgramFiles/${user}`, fs.constants.F_OK, (err: Error) => {
+          if (err) {
+            response = {type: 'add', success: false, error: color.getColor('red', 'Ese usuario no existe')};
+            cb(response, undefined);
+          } else {
             // Se comprueba si la nota ya existe
             fs.access(`/home/usuario/ull-esit-inf-dsi-21-22-prct11-async-sockets-Pablo400/ProgramFiles/${user}/${title}.json`, fs.constants.F_OK, (err: Error) => {
               if (err) {
@@ -64,17 +64,17 @@ export class AddNote extends ChalkColor {
                 cb(undefined, response);
               }
             });
-          } else {
-            response = {type: 'add', success: false,
-              error: color.getColor('red', 'No se puede crear una nota si no se le indican un color, use: red, green, yellow o blue como colores')};
-            cb(response, undefined);
           }
-        } else {
-          response = {type: 'add', success: false, error: color.getColor('red', 'No se puede crear una nota vacía')};
-          cb(response, undefined);
-        }
+        });
+      } else {
+        response = {type: 'add', success: false,
+          error: color.getColor('red', 'No se puede crear una nota si no se le indican un color, use: red, green, yellow o blue como colores')};
+        cb(response, undefined);
       }
-    });
+    } else {
+      response = {type: 'add', success: false, error: color.getColor('red', 'No se puede crear una nota vacía')};
+      cb(response, undefined);
+    }
   };
 };
 
