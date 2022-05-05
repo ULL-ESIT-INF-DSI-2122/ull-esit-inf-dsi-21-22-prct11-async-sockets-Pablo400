@@ -23,19 +23,19 @@ describe('List Note test', () => {
       }
     });
   });
-  it('Listar notas', (done) => {
-    listNote.listNoteCallback('ricardo', (_, data) => {
-      response = {
-        type: 'list',
-        success: true,
-        notes: [{title: 'Prueba', body: 'Hola Ricardo', color: 'green'}],
-      };
-      if (data) {
-        expect(data).to.be.eql(response);
-        done();
-      }
-    });
-  });
+  // it('Listar notas', (done) => {
+  //   listNote.listNoteCallback('ricardo', (_, data) => {
+  //     response = {
+  //       type: 'list',
+  //       success: true,
+  //       notes: [{title: 'Prueba', body: 'Hola Ricardo', color: 'green'}],
+  //     };
+  //     if (data) {
+  //       expect(data).to.be.eql(response);
+  //       done();
+  //     }
+  //   });
+  // });
   // it('Ese usuario no tiene ninguna nota', (done) => {
   //   listNote.listNoteCallback('saul', (err, _) => {
   //     if (err) {
