@@ -13,9 +13,18 @@ const removeNote = new RemoveNote();
 const listNotes = new ListNotes();
 const readNote = new ReadNotes();
 
+/**
+ * Server class
+ */
 class Server {
+  /**
+   * Server constructor
+   */
   constructor() { }
 
+  /**
+   * Server functions
+   */
   server() {
     net.createServer({allowHalfOpen: true}, (connection) => {
       console.log('A client has connected.');

@@ -18,9 +18,9 @@ export class RemoveNote extends ChalkColor {
 
   /**
    * This function removes a note
-   * @param user
-   * @param title
-   * @returns
+   * @param user User name
+   * @param title Note title
+   * @returns Error or correct response
    */
   removeNoteCallback = (user: string, title: string, cb: (err: ResponseType | undefined, correct: ResponseType | undefined) => void) => {
     const color = new ChalkColor();

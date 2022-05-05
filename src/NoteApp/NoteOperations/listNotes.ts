@@ -17,8 +17,8 @@ export class ListNotes extends ChalkColor {
 
   /**
    * This function list all notes on any directory of a user
-   * @param user
-   * @returns
+   * @param user User Name
+   * @returns Error or correct response
    */
   listNoteCallback = (user: string, cb: (err: ResponseType | undefined, correct: ResponseType | undefined) => void) => {
     const color = new ChalkColor();

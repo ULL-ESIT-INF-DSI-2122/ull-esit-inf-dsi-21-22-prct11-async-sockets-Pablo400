@@ -1,12 +1,23 @@
+/* eslint-disable valid-jsdoc */
 /* eslint-disable max-len */
 /* eslint-disable require-jsdoc */
 import * as net from 'net';
 import {ChalkColor} from './NoteOperations/utilities';
 import {RequestType} from './types';
 
+/**
+ * Client class
+ */
 export class Client {
+  /**
+   * Gets the request type json
+   * @param request Client request
+   */
   constructor(private request: RequestType) {}
 
+  /**
+   * Client functions
+   */
   client() {
     const json: any = this.request;
 
@@ -26,13 +37,16 @@ export class Client {
     });
   }
 
+  /**
+   * Print the content of the response json
+   * @param response Json response on string format
+   */
   printResult(response: string) {
     const color = new ChalkColor();
     const titleArray = [];
     const colorArray = [];
     const bodyArray = [];
     const serverResponse = JSON.parse(response);
-    console.log(serverResponse);
 
     if (serverResponse.success === true) {
       for (const note of serverResponse.notes) {

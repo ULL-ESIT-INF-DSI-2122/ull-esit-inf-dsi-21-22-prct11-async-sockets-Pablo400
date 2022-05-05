@@ -17,11 +17,11 @@ export class AddNote extends ChalkColor {
 
   /**
    * This function adds a note to any user directory
-   * @param user
-   * @param title
-   * @param body
-   * @param noteColor
-   * @returns
+   * @param user User Name
+   * @param title Note title
+   * @param body Note body
+   * @param noteColor Note color
+   * @returns Error or correct response
    */
   addNoteCallback = (user: string, title: string, body: string, noteColor: string, cb: (err: ResponseType | undefined, correct: ResponseType | undefined) => void) => {
     const color = new ChalkColor();

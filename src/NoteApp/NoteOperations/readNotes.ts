@@ -17,9 +17,9 @@ export class ReadNotes extends ChalkColor {
 
   /**
    * This function reads a note
-   * @param user
-   * @param title
-   * @returns
+   * @param user User name
+   * @param title Note title
+   * @returns Error or correct response
    */
   readNoteCallback = (user: string, title: string, cb: (err: ResponseType | undefined, correct: ResponseType | undefined) => void) => {
     const color = new ChalkColor();

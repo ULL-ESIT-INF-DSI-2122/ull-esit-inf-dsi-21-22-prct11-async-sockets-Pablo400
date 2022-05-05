@@ -17,10 +17,10 @@ export class ModifyNote extends ChalkColor {
 
   /**
    * This function modifies an existing note
-   * @param user
-   * @param title
-   * @param body
-   * @returns
+   * @param user User name
+   * @param title Note title
+   * @param body Note body
+   * @returns Error or correct response
    */
   modifyNoteCallback = (user: string, title: string, body: string, cb: (err: ResponseType | undefined, correct: ResponseType | undefined) => void) => {
     const color = new ChalkColor();
