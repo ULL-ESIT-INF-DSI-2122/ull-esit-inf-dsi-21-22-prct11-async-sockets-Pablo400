@@ -24,11 +24,11 @@ describe('Add Note Test', () => {
       }
     });
   });
-  it('Esa nota ya existe', (done) => {
-    addNote.addNoteCallback('pablo', 'prueba3', 'Esto es una fiesta', 'red', (_, data) => {
-      response = {type: 'add', success: false, error: color.getColor('red', 'Esa nota ya existe')};
-      if (data) {
-        expect(data).to.be.eql(response);
+  it('Nota vacía', (done) => {
+    addNote.addNoteCallback('pablo', '', 'Esto es una fiesta', 'marrón', (err, _) => {
+      response = {type: 'add', success: false, error: color.getColor('red', 'No se puede crear una nota vacía')};
+      if (err) {
+        expect(err).to.be.eql(response);
         done();
       }
     });
@@ -43,11 +43,11 @@ describe('Add Note Test', () => {
       }
     });
   });
-  it('Nota vacía', (done) => {
-    addNote.addNoteCallback('pablo', '', 'Esto es una fiesta', 'marrón', (err, _) => {
-      response = {type: 'add', success: false, error: color.getColor('red', 'No se puede crear una nota vacía')};
-      if (err) {
-        expect(err).to.be.eql(response);
+  it('Esa nota ya existe', (done) => {
+    addNote.addNoteCallback('pablo', 'prueba3', 'Esto es una fiesta', 'red', (_, data) => {
+      response = {type: 'add', success: false, error: color.getColor('red', 'Esa nota ya existe')};
+      if (data) {
+        expect(data).to.be.eql(response);
         done();
       }
     });

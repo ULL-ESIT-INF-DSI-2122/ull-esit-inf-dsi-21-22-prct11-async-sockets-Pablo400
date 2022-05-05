@@ -40,7 +40,7 @@ export class AddNote extends ChalkColor {
           body: body,
           color: noteColor,
         };
-  
+
         if (title != '' && noteColor != '' && body != '' ) {
           if (noteColor === 'red' || noteColor === 'green' || noteColor === 'yellow' || noteColor === 'blue') {
             // Se comprueba si la nota ya existe
