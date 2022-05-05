@@ -62,7 +62,7 @@ export class AddNote extends ChalkColor {
               });
             } else {
               response = {type: 'add', success: false, error: color.getColor('red', 'Esa nota ya existe')};
-              cb(response, undefined);
+              cb(undefined, response);
             }
           });
         } else {

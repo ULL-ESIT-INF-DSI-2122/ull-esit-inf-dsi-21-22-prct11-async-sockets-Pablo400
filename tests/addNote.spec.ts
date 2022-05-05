@@ -15,11 +15,20 @@ let response: ResponseType = {
 };
 
 describe('Add Note Test', () => {
-  it('Esa nota ya existe', (done) => {
-    addNote.addNoteCallback('pablo', 'prueba3', 'Esto es una fiesta', 'red', (err, _) => {
-      response = {type: 'add', success: false, error: color.getColor('red', 'Esa nota ya existe')};
+  it('Ese usuario no existe', (done) => {
+    addNote.addNoteCallback('eduardo', 'prueba3', 'Esto es una fiesta', 'red', (err, _) => {
+      response = {type: 'add', success: false, error: color.getColor('red', 'Ese usuario no existe')};
       if (err) {
         expect(err).to.be.eql(response);
+        done();
+      }
+    });
+  });
+  it('Esa nota ya existe', (done) => {
+    addNote.addNoteCallback('pablo', 'prueba3', 'Esto es una fiesta', 'red', (_, data) => {
+      response = {type: 'add', success: false, error: color.getColor('red', 'Esa nota ya existe')};
+      if (data) {
+        expect(data).to.be.eql(response);
         done();
       }
     });
