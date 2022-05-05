@@ -36,12 +36,13 @@ describe('List Note test', () => {
       }
     });
   });
-  // it('Ese usuario no tiene ninguna nota', (done) => {
-  //   listNote.listNoteCallback('saul', (err, _) => {
-  //     if (err) {
-  //       expect(err).to.be.equal(color.getColor('red', 'Ese usuario no tiene ninguna nota'));
-  //       done();
-  //     }
-  //   });
-  // });
+  it('Ese usuario no tiene ninguna nota', (done) => {
+    listNote.listNoteCallback('saul', (err, _) => {
+      if (err) {
+        response = {type: 'list', success: false, error: color.getColor('red', 'Ese usuario no tiene ninguna nota')};
+        expect(err).to.be.eql(response);
+        done();
+      }
+    });
+  });
 });

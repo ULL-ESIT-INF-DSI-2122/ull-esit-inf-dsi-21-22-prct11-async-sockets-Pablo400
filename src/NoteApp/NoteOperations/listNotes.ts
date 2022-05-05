@@ -22,7 +22,7 @@ export class ListNotes extends ChalkColor {
    */
   listNoteCallback = (user: string, cb: (err: ResponseType | undefined, correct: ResponseType | undefined) => void) => {
     const color = new ChalkColor();
-    const notes: Note[] = [];
+    const notesArray: Note[] = [];
     let response: ResponseType = {
       type: 'add',
       success: false,
@@ -35,21 +35,26 @@ export class ListNotes extends ChalkColor {
       } else {
         fs.readdir(`/home/usuario/ull-esit-inf-dsi-21-22-prct11-async-sockets-Pablo400/ProgramFiles/${user}`, (err: Error, files: any) => {
           if (err) {
-            response = {type: 'list', success: false, error: color.getColor('red', 'Ese usuario no tiene ninguna nota')};
+            response = {type: 'list', success: false, error: color.getColor('red', 'No se pudo leer el directorio')};
             cb(response, undefined);
           } else {
             files.forEach((file: string) => {
               const json: any = require(`/home/usuario/ull-esit-inf-dsi-21-22-prct11-async-sockets-Pablo400/ProgramFiles/${user}/${file}`);
-              notes.push(json);
+              notesArray.push(json);
             });
 
-            response = {
-              type: 'list',
-              success: true,
-              notes: notes,
-            };
+            if (notesArray.length > 0) {
+              response = {
+                type: 'list',
+                success: true,
+                notes: notesArray,
+              };
 
-            cb(undefined, response);
+              cb(undefined, response);
+            } else {
+              response = {type: 'list', success: false, error: color.getColor('red', 'Ese usuario no tiene ninguna nota')};
+              cb(response, undefined);
+            }
           }
         });
       }

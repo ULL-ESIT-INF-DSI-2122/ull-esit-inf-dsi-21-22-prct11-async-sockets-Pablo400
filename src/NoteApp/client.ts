@@ -32,6 +32,7 @@ export class Client {
     const colorArray = [];
     const bodyArray = [];
     const serverResponse = JSON.parse(response);
+    console.log(serverResponse);
 
     if (serverResponse.success === true) {
       for (const note of serverResponse.notes) {
@@ -63,7 +64,7 @@ export class Client {
           console.log(color.getColor(`${colorArray[i]}`, `${titleArray[i]}`));
         }
       }
-    } else {
+    } else if (serverResponse.success === false) {
       if (serverResponse.type === 'add') {
         console.log(serverResponse.error);
       }

@@ -30,12 +30,6 @@ export class AddNote extends ChalkColor {
       success: false,
     };
 
-    const json: any = {
-      title: title,
-      body: body,
-      color: noteColor,
-    };
-
     if (title != '' && noteColor != '' && body != '' ) {
       if (noteColor === 'red' || noteColor === 'green' || noteColor === 'yellow' || noteColor === 'blue') {
         fs.access(`/home/usuario/ull-esit-inf-dsi-21-22-prct11-async-sockets-Pablo400/ProgramFiles/${user}`, fs.constants.F_OK, (err: Error) => {
@@ -46,9 +40,14 @@ export class AddNote extends ChalkColor {
             // Se comprueba si la nota ya existe
             fs.access(`/home/usuario/ull-esit-inf-dsi-21-22-prct11-async-sockets-Pablo400/ProgramFiles/${user}/${title}.json`, fs.constants.F_OK, (err: Error) => {
               if (err) {
+                const json: any = {
+                  title: title,
+                  body: body,
+                  color: noteColor,
+                };
                 fs.writeFile(`/home/usuario/ull-esit-inf-dsi-21-22-prct11-async-sockets-Pablo400/ProgramFiles/${user}/${title}.json`, JSON.stringify(json, null, 2), (err: Error) => {
                   if (err) {
-                    response = {type: 'add', success: true, error: color.getColor('red', 'No se ha podido crear la nota')};
+                    response = {type: 'add', success: false, error: color.getColor('red', 'No se ha podido crear la nota')};
                     cb(response, undefined);
                   } else {
                     response = {
