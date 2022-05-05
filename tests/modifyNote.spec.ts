@@ -23,17 +23,17 @@ describe('Modify Note Test', () => {
       }
     });
   });
-  it('Modificar la Nota', (done) => {
-    modifyNote.modifyNoteCallback('pablo', 'prueba', 'Hola que tal', (_, data) => {
-      response = {
-        type: 'update',
-        success: true,
-        notes: [{title: 'prueba', body: 'Hola que tal', color: 'red'}],
-      };
-      if (data) {
-        expect(data).to.be.eql(response);
-        done();
-      }
-    });
-  });
+  // it('Modificar la Nota', (done) => {
+  //   modifyNote.modifyNoteCallback('pablo', 'prueba', 'Hola que tal', (_, data) => {
+  //     response = {
+  //       type: 'update',
+  //       success: true,
+  //       notes: [{title: 'prueba', body: 'Hola que tal', color: 'red'}],
+  //     };
+  //     if (data) {
+  //       expect(data).to.be.eql(response);
+  //       done();
+  //     }
+  //   });
+  // });
 });

@@ -23,17 +23,17 @@ describe('Read Note Test', () => {
       }
     });
   });
-  it('Lectura de una nota', (done) => {
-    readNote.readNoteCallback('pablo', 'prueba3', (_, data) => {
-      response = {
-        type: 'read',
-        success: true,
-        notes: [{title: 'prueba3', body: 'Esto es una fiesta', color: 'red'}],
-      };
-      if (data) {
-        expect(data).to.be.eql(response);
-        done();
-      }
-    });
-  });
+  // it('Lectura de una nota', (done) => {
+  //   readNote.readNoteCallback('pablo', 'prueba3', (_, data) => {
+  //     response = {
+  //       type: 'read',
+  //       success: true,
+  //       notes: [{title: 'prueba3', body: 'Esto es una fiesta', color: 'red'}],
+  //     };
+  //     if (data) {
+  //       expect(data).to.be.eql(response);
+  //       done();
+  //     }
+  //   });
+  // });
 });
