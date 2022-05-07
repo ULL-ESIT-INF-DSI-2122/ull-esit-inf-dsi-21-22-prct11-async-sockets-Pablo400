@@ -22,21 +22,10 @@ export class Client {
   client() {
     const json: any = this.request;
 
-    // const client = net.connect({port: 60300}, () => {
-    //   console.log('Connected to server!');
-    //   client.write(JSON.stringify(json));
-    //   client.end();
-    // });
-
-    // let responseString = '';
-    // myEventEmitter.on('data', (data) => {
-    //   responseString += data.toString();
-    // });
-
     const myEventEmitter = new MyEventEmitter(net.connect({port: 60300}));
     myEventEmitter.writeData(json);
 
-    myEventEmitter.on('message', (data) => {
+    myEventEmitter.on('response', (data) => {
       console.log(this.printResult(data));
     });
   }

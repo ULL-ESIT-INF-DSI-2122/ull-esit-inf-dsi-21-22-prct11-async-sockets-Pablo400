@@ -29,11 +29,6 @@ export class Server {
     net.createServer({allowHalfOpen: true}, (connection) => {
       console.log('A client has connected.');
 
-      // let clientData = '';
-      // connection.on('data', (data) => {
-      //   clientData += data.toString();
-      // });
-
       let clientData = '';
       connection.on('data', (dataChunk) => {
         clientData += dataChunk.toString();

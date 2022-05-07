@@ -15,7 +15,7 @@ export class MyEventEmitter extends EventEmitter {
     let wholeData = '';
     this.connection.on('data', (dataChunk) => {
       wholeData += dataChunk.toString();
-      this.emit('message', wholeData);
+      this.emit('response', wholeData);
     });
   }
 }
