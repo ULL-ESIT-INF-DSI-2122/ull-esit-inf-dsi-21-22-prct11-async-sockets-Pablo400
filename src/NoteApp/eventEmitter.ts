@@ -1,16 +1,21 @@
 /* eslint-disable require-jsdoc */
 
 import {EventEmitter} from 'events';
+import {RequestType} from './types';
+import * as net from 'net';
 
-export class MessageEventEmitterClient extends EventEmitter {
-  constructor(connection: EventEmitter) {
+
+export class MyEventEmitter extends EventEmitter {
+  constructor(public connection: net.Socket) {
     super();
+  }
+  public writeData(message: RequestType) {
+    this.connection.write(`${JSON.stringify(message)}`);
 
     let wholeData = '';
-    connection.on('data', (dataChunk) => {
-      wholeData += dataChunk;
-
-      this.emit('resquest', JSON.parse(wholeData));
+    this.connection.on('data', (dataChunk) => {
+      wholeData += dataChunk.toString();
+      this.emit('message', wholeData);
     });
   }
 }

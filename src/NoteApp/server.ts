@@ -16,7 +16,7 @@ const readNote = new ReadNotes();
 /**
  * Server class
  */
-class Server {
+export class Server {
   /**
    * Server constructor
    */
@@ -29,63 +29,69 @@ class Server {
     net.createServer({allowHalfOpen: true}, (connection) => {
       console.log('A client has connected.');
 
-      let clientData = '';
-      connection.on('data', (data) => {
-        clientData += data.toString();
-      });
+      // let clientData = '';
+      // connection.on('data', (data) => {
+      //   clientData += data.toString();
+      // });
 
-      connection.on('end', () => {
-        const jsonClientData = JSON.parse(clientData);
-        if (jsonClientData.type === 'add') {
-          addNote.addNoteCallback(`${jsonClientData.user}`, `${jsonClientData.title}`, `${jsonClientData.body}`, `${jsonClientData.color}`, (err, correct) => {
-            if (err) {
-              connection.write(JSON.stringify(err));
-            } else if (correct) {
-              connection.write(JSON.stringify(correct));
-            }
-            connection.end();
-          });
-        } else if (jsonClientData.type === 'update') {
-          modifyNote.modifyNoteCallback(`${jsonClientData.user}`, `${jsonClientData.title}`, `${jsonClientData.body}`, (err, correct) => {
-            if (err) {
-              connection.write(JSON.stringify(err));
-            } else if (correct) {
-              connection.write(JSON.stringify(correct));
-            }
-            connection.end();
-          });
-        } else if (jsonClientData.type === 'remove') {
-          removeNote.removeNoteCallback(`${jsonClientData.user}`, `${jsonClientData.title}`, (err, correct) => {
-            if (err) {
-              connection.write(JSON.stringify(err));
-            } else if (correct) {
-              connection.write(JSON.stringify(correct));
-            }
-            connection.end();
-          });
-        } else if (jsonClientData.type === 'read') {
-          readNote.readNoteCallback(`${jsonClientData.user}`, `${jsonClientData.title}`, (err, correct) => {
-            if (err) {
-              connection.write(JSON.stringify(err));
-            } else if (correct) {
-              connection.write(JSON.stringify(correct));
-            }
-            connection.end();
-          });
-        } else if (jsonClientData.type === 'list') {
-          listNotes.listNoteCallback(`${jsonClientData.user}`, (err, correct) => {
-            if (err) {
-              connection.write(JSON.stringify(err));
-            } else if (correct) {
-              connection.write(JSON.stringify(correct));
-            }
-            connection.end();
-          });
-        }
+      let clientData = '';
+      connection.on('data', (dataChunk) => {
+        clientData += dataChunk.toString();
+        this.serverData(clientData, connection);
       });
     }).listen(60300, () => {
       console.log('Waiting for clients to connect.');
     });
+  }
+
+  serverData(clientData: string, connection: any) {
+    const jsonClientData = JSON.parse(clientData);
+    if (jsonClientData.type === 'add') {
+      addNote.addNoteCallback(`${jsonClientData.user}`, `${jsonClientData.title}`, `${jsonClientData.body}`, `${jsonClientData.color}`, (err, correct) => {
+        if (err) {
+          connection.write(JSON.stringify(err));
+        } else if (correct) {
+          connection.write(JSON.stringify(correct));
+        }
+        connection.end();
+      });
+    } else if (jsonClientData.type === 'update') {
+      modifyNote.modifyNoteCallback(`${jsonClientData.user}`, `${jsonClientData.title}`, `${jsonClientData.body}`, (err, correct) => {
+        if (err) {
+          connection.write(JSON.stringify(err));
+        } else if (correct) {
+          connection.write(JSON.stringify(correct));
+        }
+        connection.end();
+      });
+    } else if (jsonClientData.type === 'remove') {
+      removeNote.removeNoteCallback(`${jsonClientData.user}`, `${jsonClientData.title}`, (err, correct) => {
+        if (err) {
+          connection.write(JSON.stringify(err));
+        } else if (correct) {
+          connection.write(JSON.stringify(correct));
+        }
+        connection.end();
+      });
+    } else if (jsonClientData.type === 'read') {
+      readNote.readNoteCallback(`${jsonClientData.user}`, `${jsonClientData.title}`, (err, correct) => {
+        if (err) {
+          connection.write(JSON.stringify(err));
+        } else if (correct) {
+          connection.write(JSON.stringify(correct));
+        }
+        connection.end();
+      });
+    } else if (jsonClientData.type === 'list') {
+      listNotes.listNoteCallback(`${jsonClientData.user}`, (err, correct) => {
+        if (err) {
+          connection.write(JSON.stringify(err));
+        } else if (correct) {
+          connection.write(JSON.stringify(correct));
+        }
+        connection.end();
+      });
+    }
   }
 }
 
