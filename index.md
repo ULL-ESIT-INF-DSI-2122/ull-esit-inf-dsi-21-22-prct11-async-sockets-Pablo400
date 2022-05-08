@@ -88,3 +88,4 @@ En el fichero ```server.ts``` se crea la clase ```Server``` que tiene dos métod
 
 En el primer método se crea el servidor y se emite un evento ```data``` al recibir los datos del cliente, dentro del manejador de dicho evento se guardan los datos en la variable ```clientData``` y se invoca al método ```serverData``` donde se genera la respuesta invocando a las operaciones correspondiente con ayuda de las atríbutos de ```type``` de cada ```ResquestType``` y la respuesta se manda usando el tipo de dato ```ResponseType```.
 
+En el segundo método se reciben los datos del cliente y se invoca a cada función de la aplicación de notas dependiendo de que tipo de petición haya solicitado el cliente y tras formar el paquete de respuesta este es enviado al cliente después de que el servidor haya usado en método ```end``` y cierra la conexión con el cliente. 
