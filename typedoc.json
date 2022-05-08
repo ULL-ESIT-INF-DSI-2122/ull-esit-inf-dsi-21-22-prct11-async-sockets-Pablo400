@@ -1,6 +1,16 @@
 {
   "entryPoints": [
-    "./src/index.ts"
+    "./src/NoteApp/client.ts",
+    "./src/NoteApp/eventEmitter.ts",
+    "./src/NoteApp/server.ts",
+    "./src/NoteApp/types.ts",
+    "./src/NoteApp/NoteOperations/addNote.ts",
+    "./src/NoteApp/NoteOperations/addUser.ts",
+    "./src/NoteApp/NoteOperations/listNotes.ts",
+    "./src/NoteApp/NoteOperations/modifyNote.ts",
+    "./src/NoteApp/NoteOperations/readNotes.ts",
+    "./src/NoteApp/NoteOperations/removeNote.ts",
+    "./src/NoteApp/NoteOperations/utilities.ts"
   ],
   "out": "./docs"
 }

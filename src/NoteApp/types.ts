@@ -1,3 +1,6 @@
+/**
+ * Client request
+ */
 export type RequestType = {
   user: string;
   type: 'add' | 'update' | 'remove' | 'read' | 'list' | 'userAdd';
@@ -6,6 +9,9 @@ export type RequestType = {
   color?: string;
 }
 
+/**
+ * Server response
+ */
 export type ResponseType = {
   type: 'add' | 'update' | 'remove' | 'read' | 'list' | 'userAdd';
   success: boolean;
@@ -14,6 +20,9 @@ export type ResponseType = {
   error?: string;
 }
 
+/**
+ * Note type
+ */
 export type Note = {
   title: string;
   body: string;

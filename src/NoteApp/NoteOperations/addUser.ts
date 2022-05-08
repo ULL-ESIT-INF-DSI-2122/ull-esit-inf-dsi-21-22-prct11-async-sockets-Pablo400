@@ -16,7 +16,9 @@ export class AddUser extends ChalkColor {
   }
 
   /**
-   * This function adds a new directory to any user found on a json file
+   * This function adds a new directory of a user
+   * @param user User name
+   * @returns Error or correct response
    */
   addUserCallback = (user: string, cb: (err: ResponseType | undefined, correct: ResponseType | undefined) => void) => {
     const color = new ChalkColor();

@@ -1,3 +1,4 @@
+/* eslint-disable valid-jsdoc */
 /* eslint-disable require-jsdoc */
 /* eslint-disable max-len */
 import * as net from 'net';
@@ -41,6 +42,11 @@ export class Server {
     });
   }
 
+  /**
+   * Sends the response to the client
+   * @param clientData Data Coming from the client
+   * @param connection Constains the connection data
+   */
   serverData(clientData: string, connection: any) {
     const jsonClientData = JSON.parse(clientData);
 
