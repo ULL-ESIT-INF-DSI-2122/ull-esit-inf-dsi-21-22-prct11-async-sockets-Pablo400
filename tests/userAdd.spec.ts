@@ -32,7 +32,16 @@ describe('User Add Test', () => {
         expect(data).to.be.eql(response);
         done();
       }
-      // fs.rmdirSync(`/home/usuario/ull-esit-inf-dsi-21-22-prct11-async-sockets-Pablo400/ProgramFiles/prueba`);
+      fs.rmdirSync(`/home/usuario/ull-esit-inf-dsi-21-22-prct11-async-sockets-Pablo400/ProgramFiles/prueba`);
+    });
+  });
+  it('Ya existe ese usuario', (done) => {
+    addNote.addUserCallback('pablo', (error, _) => {
+      response = {type: 'userAdd', success: false, error: color.getColor('red', 'Ese usuario ya existe')};
+      if (error) {
+        expect(error).to.be.eql(response);
+        done();
+      }
     });
   });
 });
