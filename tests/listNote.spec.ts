@@ -5,7 +5,7 @@ import {expect} from 'chai';
 import {ListNotes} from '../src/NoteApp/NoteOperations/listNotes';
 import {ChalkColor} from '../src/NoteApp/NoteOperations/utilities';
 import {ResponseType} from '../src/NoteApp/types';
-import * as fs from 'fs';
+// import * as fs from 'fs';
 
 const color = new ChalkColor();
 const listNote = new ListNotes();
