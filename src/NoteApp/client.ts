@@ -43,22 +43,29 @@ export class Client {
     let result = '';
 
     if (serverResponse.success === true) {
-      for (const note of serverResponse.notes) {
-        titleArray.push(note.title);
-        colorArray.push(note.color);
-        bodyArray.push(note.body);
+      if (serverResponse.notes) {
+        for (const note of serverResponse.notes) {
+          titleArray.push(note.title);
+          colorArray.push(note.color);
+          bodyArray.push(note.body);
+        }
+      }
+
+      if (serverResponse.type === 'userAdd') {
+        return color.getColor('green', `El usuario ${serverResponse.user} ha creado su directorio`);
       }
 
       if (serverResponse.type === 'add') {
-        return color.getColor('green', `La nota ${serverResponse.notes.title} ha sido creada de forma satisfactoria`);
+        console.log(`${serverResponse.notes.title}`);
+        return color.getColor('green', `La nota ${titleArray[0]} ha sido creada de forma satisfactoria`);
       }
 
       if (serverResponse.type === 'update') {
-        return color.getColor('green', `La nota ${serverResponse.notes.title} ha sido modificada de forma satisfactoria`);
+        return color.getColor('green', `La nota ${titleArray[0]} ha sido modificada de forma satisfactoria`);
       }
 
       if (serverResponse.type === 'remove') {
-        return color.getColor('green', `La nota ${serverResponse.notes.title} ha sido eliminada de forma satisfactoria`);
+        return color.getColor('green', `La nota ${titleArray[0]} ha sido eliminada de forma satisfactoria`);
       }
 
       if (serverResponse.type === 'read') {
@@ -72,6 +79,10 @@ export class Client {
         return result;
       }
     } else if (serverResponse.success === false) {
+      if (serverResponse.type === 'userAdd') {
+        return serverResponse.error;
+      }
+
       if (serverResponse.type === 'add') {
         return serverResponse.error;
       }

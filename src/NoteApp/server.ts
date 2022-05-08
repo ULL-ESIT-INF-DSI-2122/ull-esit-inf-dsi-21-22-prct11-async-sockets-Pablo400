@@ -6,7 +6,9 @@ import {ModifyNote} from './NoteOperations/modifyNote';
 import {RemoveNote} from './NoteOperations/removeNote';
 import {ListNotes} from './NoteOperations/listNotes';
 import {ReadNotes} from './NoteOperations/readNotes';
+import {AddUser} from './NoteOperations/addUser';
 
+const addUser = new AddUser();
 const addNote = new AddNote();
 const modifyNote = new ModifyNote();
 const removeNote = new RemoveNote();
@@ -41,7 +43,17 @@ export class Server {
 
   serverData(clientData: string, connection: any) {
     const jsonClientData = JSON.parse(clientData);
-    if (jsonClientData.type === 'add') {
+
+    if (jsonClientData.type === 'userAdd') {
+      addUser.addUserCallback(`${jsonClientData.user}`, (err, correct) => {
+        if (err) {
+          connection.write(JSON.stringify(err));
+        } else if (correct) {
+          connection.write(JSON.stringify(correct));
+        }
+        connection.end();
+      });
+    } else if (jsonClientData.type === 'add') {
       addNote.addNoteCallback(`${jsonClientData.user}`, `${jsonClientData.title}`, `${jsonClientData.body}`, `${jsonClientData.color}`, (err, correct) => {
         if (err) {
           connection.write(JSON.stringify(err));

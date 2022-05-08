@@ -6,6 +6,30 @@ import {Client} from './client';
 
 let request: RequestType;
 
+/**
+ * Add User to the Note App
+ */
+yargs.command({
+  command: 'userAdd',
+  describe: 'Adds a user to the system',
+  builder: {
+    user: {
+      describe: 'User name',
+      demandOption: true,
+      type: 'string',
+    },
+  },
+  handler(argv) {
+    request = {
+      type: 'userAdd',
+      user: `${argv.user}`,
+    };
+
+    const client = new Client(request);
+    client.client();
+  },
+});
+
 // Add Note
 yargs.command({
   command: 'add',

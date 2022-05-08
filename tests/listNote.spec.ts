@@ -5,6 +5,7 @@ import {expect} from 'chai';
 import {ListNotes} from '../src/NoteApp/NoteOperations/listNotes';
 import {ChalkColor} from '../src/NoteApp/NoteOperations/utilities';
 import {ResponseType} from '../src/NoteApp/types';
+// import * as fs from 'fs';
 
 const color = new ChalkColor();
 const listNote = new ListNotes();
@@ -37,12 +38,14 @@ describe('List Note test', () => {
   //   });
   // });
   // it('Ese usuario no tiene ninguna nota', (done) => {
-  //   listNote.listNoteCallback('saul', (err, _) => {
+  //   fs.mkdirSync('/home/usuario/ull-esit-inf-dsi-21-22-prct11-async-sockets-Pablo400/ProgramFiles/prueba');
+  //   listNote.listNoteCallback('prueba', (err, _) => {
   //     if (err) {
   //       response = {type: 'list', success: false, error: color.getColor('red', 'Ese usuario no tiene ninguna nota')};
   //       expect(err).to.be.eql(response);
   //       done();
   //     }
   //   });
+  //   fs.rmdirSync(`/home/usuario/ull-esit-inf-dsi-21-22-prct11-async-sockets-Pablo400/ProgramFiles/prueba`);
   // });
 });
