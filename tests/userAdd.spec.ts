@@ -32,6 +32,8 @@ describe('User Add Test', () => {
         expect(data).to.be.eql(response);
         done();
       }
+      fs.writeFileSync('/home/usuario/ull-esit-inf-dsi-21-22-prct11-async-sockets-Pablo400/ProgramFiles/prueba/myfile.txt', 'Prueba');
+      fs.unlinkSync('/home/usuario/ull-esit-inf-dsi-21-22-prct11-async-sockets-Pablo400/ProgramFiles/prueba/myfile.txt');
       fs.rmdirSync(`/home/usuario/ull-esit-inf-dsi-21-22-prct11-async-sockets-Pablo400/ProgramFiles/prueba`);
     });
   });
