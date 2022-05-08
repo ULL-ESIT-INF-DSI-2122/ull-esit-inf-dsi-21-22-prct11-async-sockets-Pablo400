@@ -14,6 +14,8 @@ let response: ResponseType = {
   success: false,
 };
 
+fs.mkdirSync('/home/usuario/ull-esit-inf-dsi-21-22-prct11-async-sockets-Pablo400/ProgramFiles/prueba');
+
 describe('List Note test', () => {
   it('Ese usuario no existe', (done) => {
     listNote.listNoteCallback('eduardo', (err, _) => {
@@ -38,7 +40,6 @@ describe('List Note test', () => {
   //   });
   // });
   it('Ese usuario no tiene ninguna nota', (done) => {
-    fs.mkdirSync('/home/usuario/ull-esit-inf-dsi-21-22-prct11-async-sockets-Pablo400/ProgramFiles/prueba');
     listNote.listNoteCallback('prueba', (err, _) => {
       if (err) {
         response = {type: 'list', success: false, error: color.getColor('red', 'Ese usuario no tiene ninguna nota')};
