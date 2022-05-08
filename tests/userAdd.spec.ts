@@ -32,7 +32,7 @@ describe('User Add Test', () => {
         expect(data).to.be.eql(response);
         done();
       }
-      fs.rmdirSync(`/home/usuario/ull-esit-inf-dsi-21-22-prct11-async-sockets-Pablo400/ProgramFiles/prueba`);
+      // fs.rmdirSync(`/home/usuario/ull-esit-inf-dsi-21-22-prct11-async-sockets-Pablo400/ProgramFiles/prueba`);
     });
   });
 });
