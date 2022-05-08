@@ -33,13 +33,12 @@ export class RemoveNote extends ChalkColor {
         response = {type: 'remove', success: false, error: color.getColor('red', 'Esa nota no existe')};
         cb(response, undefined);
       } else {
+        const json = require(`/home/usuario/ull-esit-inf-dsi-21-22-prct11-async-sockets-Pablo400/ProgramFiles/${user}/${title}.json`);
         fs.unlink(`/home/usuario/ull-esit-inf-dsi-21-22-prct11-async-sockets-Pablo400/ProgramFiles/${user}/${title}.json`, (err: Error) => {
           if (err) {
             response = {type: 'remove', success: false, error: color.getColor('red', 'La nota no pudo ser eliminada')};
             cb(response, undefined);
           }
-
-          const json = require(`/home/usuario/ull-esit-inf-dsi-21-22-prct11-async-sockets-Pablo400/ProgramFiles/${user}/${title}.json`);
           response = {
             type: 'remove',
             success: true,

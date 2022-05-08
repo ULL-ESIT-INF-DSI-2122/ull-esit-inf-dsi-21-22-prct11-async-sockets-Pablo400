@@ -16,7 +16,7 @@ let response: ResponseType = {
 
 describe('List Note test', () => {
   it('Ese usuario no existe', (done) => {
-    listNote.listNoteCallback('eduardo', (err, _) => {
+    listNote.listNoteCallback('pruebas', (err, _) => {
       response = {type: 'list', success: false, error: color.getColor('red', 'Ese usuario no existe')};
       if (err) {
         expect(err).to.be.eql(response);

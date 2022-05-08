@@ -56,7 +56,6 @@ export class Client {
       }
 
       if (serverResponse.type === 'add') {
-        console.log(`${serverResponse.notes.title}`);
         return color.getColor('green', `La nota ${titleArray[0]} ha sido creada de forma satisfactoria`);
       }
 
